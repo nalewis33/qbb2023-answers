@@ -24,15 +24,11 @@ Data from:
 https://github.com/bxlab/cmdb-quantbio/raw/main/assignments/lab/bulk_RNA-seq/extra_data/all_annotated.csv
 """
 
-"""
-Exercise 1:
-
 #creating a data structure to store the title columns (transcript names, the first two columns)
 transcripts = np.loadtxt( "all_annotated.csv", delimiter=",", usecols=0, dtype="<U30", skiprows=1 )
 #print( "transcripts: ", transcripts[0:5] )
 
-
-#Creating a data set to store the name of samples (first row)
+#Creating a data set to store the name of sampes (first row)
 samples = np.loadtxt( "all_annotated.csv", delimiter=",", max_rows=1, dtype="<U30" )[2:]
 #print( "samples: ", samples[0:5] )
 
@@ -88,23 +84,4 @@ plt.xticks(rotation=90) #rotating x-axis label by 90 degrees
 
 fig1.savefig( "FBtr0073461.png" ) #saving figure as a png file
 plt.close( fig1 ) #closing figure
-
-"""
-#Exercise 2:
-
-f = open("all_annotated.csv", "r") #opening the csv file as read only
-lines = f.readlines()
-lines = lines[1:]
-print(lines)
-
-transcripts2 = []
-
-for i in lines: #stripping extra line from each list value
-    i = i.rstrip()
-    line_list = i.split() #splitting the values of each into a list
-    transcripts2.append(line_list)
-
-print(transcripts2)
-
-
 
