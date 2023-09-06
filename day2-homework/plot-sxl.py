@@ -72,15 +72,15 @@ y_male_2 = expression_male_2 #Setting up expression data for 2*males
 # Plotting data- males and females should be on the same x-axis
 fig1, ax1 = plt.subplots() #setting up figure 1
 
-ax1.plot(x_female, y_female) #plotting female expression data
-ax1.plot(x_male, y_male) #plotting male expression data
-ax1.plot(x_male,y_male_2) #plotting 2* male expression data
-""" commenting out labels to add in for exercise 4
+ax1.plot(x_female, y_female, label = 'female') #plotting female expression data
+ax1.plot(x_male, y_male, label = 'male') #plotting male expression data
+ax1.plot(x_male,y_male_2, label = '2*male') #plotting 2* male expression data
+ax1.legend() #adding in a legend
 ax1.set_title( "sisA(FBtr0073461)" ) 
 ax1.set_ylabel("mRNA abundance (RPKM)")
 ax1.set_xlabel("Developmental Stage")
 plt.xticks(rotation=90) #rotating x-axis label by 90 degrees
-"""
+
 fig1.savefig( "FBtr0073461.png" ) #saving figure as a png file
 plt.close( fig1 ) #closing figure
 
