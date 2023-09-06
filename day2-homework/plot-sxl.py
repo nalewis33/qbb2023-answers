@@ -42,28 +42,38 @@ for i in range(len(transcripts)):
         row = i
 
 
-#Female Data:
-# Find columns with female only samples
-cols = [] #generating empty dataset for columns of interest
+#Generating arrays for male and female:
+# Find columns with gender-specific samples
+cols_females = [] #generating empty dataset for columns of interest
+cols_males = []
 for i in range(len(samples)):
     if "female" in samples[i]:#finding samples that are for females (have "female" in the sample id)
-        cols.append(i) #adding female columns into the empty column dataset
+        cols_females.append(i) #adding female columns into the empty column dataset
+    else: #if not having females, assume they're male 
+    	cols_males.append(i)
 
 # Subset data of interest
-expression = data[row, cols] #generating an expression set for the subset of females expressing at the value of that specific transcript
+expression_female = data[row, cols_females] #generating an expression set for the subset of females expressing at the value of that specific transcript
+expression_male = data[row, cols_males] #generating an expression set for subset of males expressing gene of interest
+
 
 # Prepare data
-x = samples[cols]
-y = expression
+x_female = samples[cols_females]
+x_female = np.char.strip(x_female, 'female_') #stripping the 'female' text from the x-axis, so that the male and female developmental stages overlap
+x_male = samples[cols_males]
+x_male = np.char.strip(x_male, 'male_') #stripping the 'male_' text from the x-axis, so that male and female developmental stages can overlap.
+y_female = expression_female #setting up expression data for females
+y_male = expression_male  #setting up expression data for males
 
-# Plot data
+# Plotting data- males and females should be on the same x-axis
 fig1, ax1 = plt.subplots()
 
-ax1.plot(x, y)
+ax1.plot(x_female, y_female) #plotting female expression data
+ax1.plot(x_male, y_male) #plotting male expression data
 ax1.set_title( "sisA(FBtr0073461)" )
 ax1.set_ylabel("mRNA abundance (RPKM)")
 ax1.set_xlabel("Developmental Stage")
 plt.xticks(rotation=90) #rotating x-axis label by 90 degrees
-fig1.savefig( "FBtr0073461.png" )
-plt.close( fig1 )
+fig1.savefig( "FBtr0073461.png" ) #saving figure as a png file
+plt.close( fig1 ) #closing figure
 
