@@ -49,38 +49,27 @@ cols_males = []
 for i in range(len(samples)):
     if "female" in samples[i]:#finding samples that are for females (have "female" in the sample id)
         cols_females.append(i) #adding female columns into the empty column dataset
-    else: #if not having females, assume they're male 
-        cols_males.append(i)
 
 # Subset data of interest
 expression_female = data[row, cols_females] #generating an expression set for the subset of females expressing at the value of that specific transcript
-expression_male = data[row, cols_males] #generating an expression set for subset of males expressing gene of interest
-
-# Adding 2* male data (Exercise 1, part 3)
-expression_male_2 = 2* np.array(expression_male) #doubling expression values for males and storing in a separate array
 
 
 # Prepare data
 x_female = samples[cols_females]
-x_female = np.char.strip(x_female, 'female_') #stripping the 'female' text from the x-axis, so that the male and female developmental stages overlap
-x_male = samples[cols_males]
-x_male = np.char.strip(x_male, 'male_') #stripping the 'male_' text from the x-axis, so that male and female developmental stages can overlap.
 y_female = expression_female #setting up expression data for females
-y_male = expression_male  #setting up expression data for males
-y_male_2 = expression_male_2 #Setting up expression data for 2*males
+
 
 # Plotting data- males and females should be on the same x-axis
 fig1, ax1 = plt.subplots() #setting up figure 1
 
 ax1.plot(x_female, y_female, label = 'female') #plotting female expression data
-ax1.plot(x_male, y_male, label = 'male') #plotting male expression data
-ax1.plot(x_male,y_male_2, label = '2*male') #plotting 2* male expression data
+"""
 ax1.legend() #adding in a legend
 ax1.set_title( "sisA(FBtr0073461)" ) 
 ax1.set_ylabel("mRNA abundance (RPKM)")
 ax1.set_xlabel("Developmental Stage")
 plt.xticks(rotation=90) #rotating x-axis label by 90 degrees
-
+"""
 fig1.savefig( "FBtr0073461.png" ) #saving figure as a png file
 plt.close( fig1 ) #closing figure
 
