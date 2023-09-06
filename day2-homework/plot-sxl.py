@@ -56,6 +56,9 @@ for i in range(len(samples)):
 expression_female = data[row, cols_females] #generating an expression set for the subset of females expressing at the value of that specific transcript
 expression_male = data[row, cols_males] #generating an expression set for subset of males expressing gene of interest
 
+# Adding 2* male data (Exercise 1, part 3)
+expression_male_2 = 2* np.array(expression_male) #doubling expression values for males and storing in a separate array
+
 
 # Prepare data
 x_female = samples[cols_females]
@@ -64,16 +67,20 @@ x_male = samples[cols_males]
 x_male = np.char.strip(x_male, 'male_') #stripping the 'male_' text from the x-axis, so that male and female developmental stages can overlap.
 y_female = expression_female #setting up expression data for females
 y_male = expression_male  #setting up expression data for males
+y_male_2 = expression_male_2 #Setting up expression data for 2*males
 
 # Plotting data- males and females should be on the same x-axis
-fig1, ax1 = plt.subplots()
+fig1, ax1 = plt.subplots() #setting up figure 1
 
 ax1.plot(x_female, y_female) #plotting female expression data
 ax1.plot(x_male, y_male) #plotting male expression data
-ax1.set_title( "sisA(FBtr0073461)" )
+ax1.plot(x_male,y_male_2) #plotting 2* male expression data
+""" commenting out labels to add in for exercise 4
+ax1.set_title( "sisA(FBtr0073461)" ) 
 ax1.set_ylabel("mRNA abundance (RPKM)")
 ax1.set_xlabel("Developmental Stage")
 plt.xticks(rotation=90) #rotating x-axis label by 90 degrees
+"""
 fig1.savefig( "FBtr0073461.png" ) #saving figure as a png file
 plt.close( fig1 ) #closing figure
 
