@@ -45,7 +45,7 @@ def wright_fischer(n,p): #defining the function with input parameters n (populat
 		p_list.append(p) #adding 
 	return(p_list) #return the list of frequencies from the function
 
-"""
+
 frequencies = wright_fischer(1000, 0.5) #test case using 10000 individuals and a starting frequency of 0.5
 #print(frequencies) #printing to check
 gen_frequency = len(frequencies)
@@ -58,7 +58,7 @@ ax1.set_xlabel("Number of generations") #setting label x axis (number of generat
 ax1.set_title("Time to Allele Fixation") #Adding title
 fig1.savefig( "Exercise 1 Allele Frequency Plot" ) #saving figure as a png file
 plt.close(fig1)
-"""
+
 """
 Exercise 2:
 Because sampling from the binomial distribution is random, the behavior of this model changes every time that we run it. (To view this, run np.random.binomial(n, p) a few times on your own and see how the numbers vary). Run your model repeatedly (at least 30 iterations) and visualize all your allele frequency trajectories together on one plot. Remember that you can lines to a matplotlib figure using a for loop.
@@ -73,7 +73,7 @@ Run your model at least 1000 times and create a histogram of the times to fixati
 # visualize frequencies together on a histogram
 
 
-"""
+
 fig2, ax2 = plt.subplots()
 ax2.set_ylabel("Allelic frequencies") #setting label for y axis (allelic frequencies)
 ax2.set_xlabel("Number of generations") #setting label x axis (number of generation)
@@ -104,7 +104,7 @@ ax3.hist(gen_list) #Generating histogram from the generation list
 fig3.savefig( "Exercise_2_Histogram" ) #saving figure as a png file
 plt.close(fig3) #closing
 
-"""
+
 
 #Exercise 3:
 """
