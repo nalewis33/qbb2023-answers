@@ -72,6 +72,8 @@ Run your model at least 1000 times and create a histogram of the times to fixati
 # run function 30 times 
 # visualize frequencies together on a histogram
 
+
+"""
 fig2, ax2 = plt.subplots()
 ax2.set_ylabel("Allelic frequencies") #setting label for y axis (allelic frequencies)
 ax2.set_xlabel("Number of generations") #setting label x axis (number of generation)
@@ -102,7 +104,70 @@ ax3.hist(gen_list) #Generating histogram from the generation list
 fig3.savefig( "Exercise_2_Histogram" ) #saving figure as a png file
 plt.close(fig3) #closing
 
+"""
+
+#Exercise 3:
+"""
+We can use our model to investigate how changing the population size affects the time to fixation. Pick at least five population sizes greater than or equal to 50. For each population size, run the model at least 50 times and find the average time to fixation. Keep your allele frequency constant for all runs. Create a scatter or line plot of population size vs. average time to fixation.
+
+We can do the same for allele frequencies. This time, pick a population size and vary the allele frequency. Run at least 10 trials for each allele frequency. If your this takes a while to run, decrease your population size. For me, 1000 individuals and 10 trials per allele frequency ran fast enough.
+"""
+
+# Run the frequency model for 5 different populations of size >50 
+# For each population:
+# 	Run at least 50 times
+# 	Calculate average time to fixation across all 50 (sum of generations to fixation/ 50)
+#Plot population size vs. average time to fixation
+def avg_fixation_pop_50(n, p):
+	gen_sim = [] #generating empty list to store values for length to fixation
+	for i in range(50):
+		freq = wright_fischer(n, p) #calculating frequency to fixation using previous wright_fischer function
+		gen_fix = len(freq) #number of generations to fixation = length of frequency list
+		gen_sim.append(gen_fix) #adding the generations to fixation value for each sim to a list
+	#Now that gen_sim is defined, calculating the average:
+	total_gens = 0 #setting up a variable to store the total per generation
+	for i in gen_sim: #for each value in gen_sim (list of integers):
+		total_gens += i #add the value to total_gens
+
+	avg_fix_gen = total_gens/len(gen_sim) #calculate average fixation time as total generations times/length of the list of the list of simulation fixation points (50)
+	return(avg_fix_gen) #return calculated average
+
+	
+
+pop_sizes = [500, 1000, 2000, 5000, 10000] #setting a list of different population sizes
+avg_fix = [] #creating empty list for average fixation times
+for i in pop_sizes: #for each index in pop_sizes:
+	fix_time = avg_fixation_pop_50(i, 0.5) #calculating average fixation time
+	avg_fix.append(fix_time) #appending average fixation time onto avg_fix list. 
 
 
+# print(avg_fix) #printing to check
+fig4, ax4 = plt.subplots() #generating graph
+ax4.plot(pop_sizes, avg_fix)
+ax4.set_title('Fixation time vs Population Size') #adding title
+ax4.set_xlabel('Population Size') #adding x-axis label
+ax4.set_ylabel('Fixation Time (# of Generations)') #adding y-axis label
+fig4.savefig("Exercise_3_Population_Size") #saving figure
+plt.close(fig4) #closing figure
+
+#Run frequency model for 5 different populations of the same size, with 5 different allelic frequencies
+# Run at least 10 times
+# Calculate average time to fixation across simulations
+# Plot allelic frequency vs average time to fixation
 
 
+allele_set = [0.1, 0.25, 0.5, 0.75, 0.95] #setting a list of different allele frequencies
+avg_fix2 = [] #creating empty list for average fixation times
+for i in allele_set: #for each index in pop_sizes:
+	fix_time2 = avg_fixation_pop_50(1000, i) #calculating average fixation time with 100 individuals and varying population size
+	avg_fix2.append(fix_time2) #appending average fixation time onto avg_fix2 list. 
+
+
+# print(avg_fix) #printing to check
+fig5, ax5 = plt.subplots() #generating graph
+ax5.plot(allele_set, avg_fix2)
+ax5.set_title('Fixation time vs Allelic Frequencies') #adding Title
+ax5.set_xlabel('Allelic Frequencies') #Labeling x-axis
+ax5.set_ylabel('Fixation Time (# of Generations)') #labeling y-axis
+fig5.savefig("Exercise_3_Allele_Frequencies") #saving figure
+plt.close(fig5) #closing figure
