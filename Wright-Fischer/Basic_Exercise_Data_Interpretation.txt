@@ -1,0 +1,11 @@
+Answer one of the two questions below 3 times (any combination works - you can do 3 plots, 1 plot and 2 assumptions, etc.).
+
+For any plot, explain the results you see. What might be contributing to it? What does it mean biologically?
+
+For any assumption in the Wright-Fisher model, how might changing that assumption affect the result? How might nature and biology violate these assumptions?
+
+1. Examining the plot of starting allelic frequencies to fixation time (see Exercise_3_Allele_Frequencies.png in GitHub), there's a parabolic effect observed, where the fixation time (in number of generations) peak near p =0.5, and is minimized as p approaches 0 and 1. When the allele frequencies are already near fixation, it takes fewer generation times for the frequency to approach fixation. On the opposite end, when allele frequencies are near 0.5, they are the furthest away from fixation, so it takes more generations to reach fixation.
+
+2. Examining the plot of population size vs. fixation times (see Exercise_3_Population_Size.png in GitHub), there is a linear increase in fixation time as the population size increases. Even if the starting allele frequencies are the same across population sizes, the total number of individuals with different alleles is grater. Therefore, it takes longer for fixation to occur as there is a larger population of distinct alleles that need to be slowly removed from the population pool before fixation can occur. 
+
+3. One of the assumptions made in the Wright-Fisher model is that the population size is fixed. In nature, population sizes are frequently in flux and are rarely fixed in the ideal way the model assumes- natural disasters, illnesses, and competition are all examples of events that occur in nature that can drastically shift the population size, and subsequently changes allele frequencies. For example, genetic bottlenecks are often brought about by rapid population drops. During these bottlenecks, alleles can be entirely removed from a population as members die off, decreasing genetic diversity. On the opppsite side of the spectrum, the allele frequencies held by surviving members can often increase and approach fixation, as other allelic populations are removed from the pool. 
