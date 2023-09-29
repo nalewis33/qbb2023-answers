@@ -33,7 +33,7 @@ cat Graph.txt | dot -Tpng > ex.2_digraph.png
 
 Exercise 2.5
 
-ATT TTC TCT CTT TTA TAT ATT TTG TGA GAT ATT TTC TCA CAT ATT TTT
+ATTCTTATTGATTCATTT
 
 Exercise 2.6
 
