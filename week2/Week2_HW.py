@@ -44,3 +44,60 @@ def simulate_coverage(coverage, genome_len, read_len, figname): #defining a func
 simulate_coverage(3, 1000000, 100, 'ex1_3x_cov.png')  #simulating covering for 3X coverage of 1 Mbp genome length with 100 bp reads. Saving as a figure.
 simulate_coverage(10, 1000000, 100, 'ex1_10x_cov.png') #simulating covering for 10X coverage of 1 Mbp genome length with 100 bp reads. Saving as a figure.
 simulate_coverage(30, 1000000, 100, 'ex1_30x_cov.png') #simulating covering for 30X coverage of 1 Mbp genome length with 100 bp reads. Saving as a figure.
+
+#Exercise 2: De Brujin Graph Construction
+
+reads = ['ATTCA', 'ATTGA', 'CATTG', 'CTTAT', 'GATTG', 'TATTT', 'TCATT', 'TCTTA', 'TGATT', 'TTATT', 'TTCAT', 'TTCTT', 'TTGAT'] #adding in list of reads.
+
+
+"""
+Write code to find all of the edges in the de Bruijn graph corresponding to the provided reads using k = 3 
+(assume all reads are from the forward strand, no sequencing errors, complete coverage of the genome). 
+Each edge should be of the format ATT -> TTC. Write all edges to a file, with each edge as its own line in the file."""
+
+#I'm writing my own psuedocode to help me understand, don't mind me. 
+# Create a list of edges (each edge being one line)
+# Edge_list = []
+# for each element in the reads list:
+# 	for i in each element: (ex. 2 edges in a 5 nt sequence, 3 in a 6 nt)
+#		first k-mer = letters i- i+2 
+#		second k-mer = letter i+1 - i+3
+#		edge = k-mer1 --> k-mer 2
+#		add edge + \n to Edge_List (to make new line)
+#		repeat until finished each edge in each element
+# After generating edge list: print each edge on a separate line
+
+
+#print(reads[0][0]) #calling individual elements (characters) in reads using this formatting (for my own reference)
+
+graph = set() #creating graph, aka set of edges
+
+for sequence in range(len(reads)): #for each sequence in the list of reads
+	#print(reads[sequence])
+	#sequence_range = range(len(reads[sequence]) - 3)
+	#print(type(sequence_range))
+	for i in range(len(reads[sequence]) - 3): #for each edge (there are len(nt)- 3 number per sequence when using a k=3):
+		kmer1 = (reads[sequence][i:i+3]) #kmer1 = 3 nt based on index
+		kmer2 = (reads[sequence][i+1 : i+4])  #kmer 2 = 3 nt, shifted one position over from kmer 1
+		#print(kmer1)
+		#print(kmer2)
+		edge = kmer1 + " -> " + kmer2  #edge = kmer1 -> kmer2
+		graph.add(edge) #adding each edge to the graph list
+		i+=1 # adding 1 to i
+	sequence+=1 #adding 1 to the sequence (reads index)
+
+for edge in graph: #for each edge in the graph
+	print(edge) #print each edge. 
+
+#print(graph) #printing to look at
+
+
+with open('Graph.txt', 'w') as f: #outputting graph to a .txt format that graphviz can read.
+	f.write('digraph {\n') #starting with digraph {, introducing a line break
+	f.write('\n'.join(graph) ) #adding a line break before each edge 
+	f.write('\n}') #concluding text file with another line break and closing bracket. 
+
+
+
+
+
